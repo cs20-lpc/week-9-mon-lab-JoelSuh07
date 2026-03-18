@@ -1,7 +1,10 @@
 template <typename T>
 LinkedQueue<T>::LinkedQueue() {
     // TODO
+    head = nullptr;
+    last = nullptr;
 
+    this->length = 0;
 }
 
 template <typename T>
@@ -51,17 +54,57 @@ void LinkedQueue<T>::clear() {
 template <typename T>
 void LinkedQueue<T>::copy(const LinkedQueue<T>& copyObj) {
     // TODO
+    clear();
+    if (copyObj->head == nullptr) return; //if source is empty, then return
+
+    Node* cur = copyObj->head;
+
+    while(cur != nullptr){
+        this->enqueue(cur->value); //enqueue will handle the newNode
+        cur = cur -> next;
+    }
 }
 
 template <typename T>
 void LinkedQueue<T>::dequeue() {
     // TODO
+    if (head == nullptr) throw string ("error: queue is empty. Nothing to dequeue.");
+
+    Node* temp = head;
+
+    head = head -> next;
+
+    if (head == nullptr) last = nullptr; // if there was only 1 node, then head and last will be nullptr
+
+    delete temp;
+    --this->length;
 }
 
 template <typename T>
 void LinkedQueue<T>::enqueue(const T& elem) {
     // TODO
-}
+    Node* newNode = new Node(elem, nullptr);
+
+    if (head == nullptr) { //if already empty, just assign newNode as head and ++
+        head = newNode;
+        last = newNode;
+    } else{
+    last -> next = newNode;
+    newNode = last;
+    }
+
+    ++this->length;
+    /*
+    while (cur -> next != nullptr){
+        cur = cur -> next;
+    } 
+
+    cur -> next = newNode;
+    last = newNode;
+    ++this->length;
+    return;
+    */
+    }
 
 template <typename T>
 T LinkedQueue<T>::front() const {
