@@ -1,6 +1,7 @@
 template <typename T>
 LinkedQueue<T>::LinkedQueue() {
     // TODO
+
 }
 
 template <typename T>
@@ -25,11 +26,26 @@ LinkedQueue<T>::~LinkedQueue() {
 template <typename T>
 T LinkedQueue<T>::back() const {
     // TODO
+    if (head == nullptr) throw string ("error: Queue is empty. Nothing to return.");
+
+    return tail->value;
 }
 
 template <typename T>
 void LinkedQueue<T>::clear() {
     // TODO
+    Node* cur = head;
+    Node* temp = cur;
+
+    while (cur != nullptr){
+        cur = cur -> next;
+        delete temp;
+        temp = cur;
+    }
+
+    head = nullptr;
+    tail = nullptr;
+    this->length = 0;
 }
 
 template <typename T>
@@ -50,6 +66,9 @@ void LinkedQueue<T>::enqueue(const T& elem) {
 template <typename T>
 T LinkedQueue<T>::front() const {
     // TODO
+    if (head == nullptr) throw string ("error: Queue is empty. Nothing to return.");
+
+    return head->value;
 }
 
 template <typename T>
