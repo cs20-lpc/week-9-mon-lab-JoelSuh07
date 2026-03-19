@@ -90,7 +90,7 @@ void LinkedQueue<T>::enqueue(const T& elem) {
         last = newNode;
     } else{
     last -> next = newNode;
-    newNode = last;
+    last = newNode;
     }
 
     ++this->length;
