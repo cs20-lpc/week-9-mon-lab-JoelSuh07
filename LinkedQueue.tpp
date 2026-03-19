@@ -31,7 +31,7 @@ T LinkedQueue<T>::back() const {
     // TODO
     if (head == nullptr) throw string ("error: Queue is empty. Nothing to return.");
 
-    return tail->value;
+    return last->value;
 }
 
 template <typename T>
@@ -47,7 +47,7 @@ void LinkedQueue<T>::clear() {
     }
 
     head = nullptr;
-    tail = nullptr;
+    last = nullptr;
     this->length = 0;
 }
 
@@ -55,9 +55,9 @@ template <typename T>
 void LinkedQueue<T>::copy(const LinkedQueue<T>& copyObj) {
     // TODO
     clear();
-    if (copyObj->head == nullptr) return; //if source is empty, then return
+    if (copyObj.head == nullptr) return; //if source is empty, then return
 
-    Node* cur = copyObj->head;
+    Node* cur = copyObj.head;
 
     while(cur != nullptr){
         this->enqueue(cur->value); //enqueue will handle the newNode
